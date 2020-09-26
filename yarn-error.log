@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/bin/node /usr/local/bin/yarn add axios --json
+  /usr/local/bin/node /usr/local/bin/yarn audit --json --non-interactive --no-progress
 
 PATH: 
-  /Users/yanghengheng/mall/node_modules/.bin:/Users/yanghengheng/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin::/Users/yanghengheng/apache-maven-3.6.2/bin
+  /Users/yanghengheng/git/test/node_modules/.bin:/Users/yanghengheng/git/node_modules/.bin:/Users/yanghengheng/node_modules/.bin:/Users/node_modules/.bin:/node_modules/.bin:/usr/local/bin:/usr/local/opt/mysql@5.7/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_221.jdk/Contents/Home/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin::/Users/yanghengheng/apache-maven-3.6.2/bin
 
 Yarn version: 
   1.22.5
@@ -14,13 +14,8 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: Client network socket disconnected before secure TLS connection was established
-      at connResetException (internal/errors.js:570:14)
-      at TLSSocket.onConnectEnd (_tls_wrap.js:1361:19)
-      at Object.onceWrapper (events.js:299:28)
-      at TLSSocket.emit (events.js:215:7)
-      at endReadableNT (_stream_readable.js:1184:12)
-      at processTicksAndRejections (internal/process/task_queues.js:80:21)
+  Error: read ECONNRESET
+      at TLSWrap.onStreamRead (internal/stream_base_commons.js:201:27)
 
 npm manifest: 
   {
