@@ -1,9 +1,9 @@
 <template>
-    <div></div>
+    <div>alipay</div>
 </template>
 
 <script>
 export default {
-    name:'nav-footer'
+    name:'alipay'
 }
 </script>
