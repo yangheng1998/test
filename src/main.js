@@ -5,14 +5,14 @@ import router from './router'
 // vue-axios是将axios集成到Vue.js的小包装器
 import axios from 'axios'
 import VueAxios from 'vue-axios'   
-import env from './env'
+// import env from './env'
 
 // 根据前端的跨域方式进行调整 /a/b :   /api/a/b  =>/a/b
-axios.defaults.baseURL='/api'
-axios.defaults.timeout= 8000
+// axios.defaults.baseURL='/api'
+// axios.defaults.timeout= 8000
 
 // 根据环境变量获取不同的请求地址
-axios.defaults.baseURL=env.baseURL
+// axios.defaults.baseURL=env.baseURL
 
 // 接口错误拦截
 axios.interceptors.response.use(function(response){
