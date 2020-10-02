@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     
-    <router-view></router-view>
+    <router-view>
+      
+    </router-view>
     
   </div>
 </template>
@@ -27,9 +29,9 @@ export default {
     //   this.res=res
     // })
     // 2、能够通过easymock
-    this.axios.get('/mock/user/login.json').then((res)=>{
-      this.res=res
-    })
+    // this.axios.get('/mock/user/login.json').then((res)=>{
+    //   this.res=res
+    // })
     // 3、能够下载插件mockjs  进行加载 只不过他不会发送请求 但是能得到数据
     
   }
@@ -40,13 +42,7 @@ export default {
 
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+@import url('./assets/scss/reset.scss');
 
 #nav {
   padding: 30px;
