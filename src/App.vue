@@ -17,7 +17,7 @@ export default {
   },
   data(){
     return {
-      res:{}
+      
     }
   },
   // 生命周期 在其中发送异步请求
@@ -32,16 +32,40 @@ export default {
     //   this.res=res
     // })
     // 3、能够下载插件mockjs  进行加载 只不过他不会发送请求 但是能得到数据
+    if(this.$cookie.get('userId')){
+      this.getUser()
+      this.getCartCount()
+    }
     
-  }
+
+  },
+  methods: {
+    // 获取用户者的数据
+    getUser(){
+      this.axios.get('/user').then((res={})=>{
+        //  to-do  保存早 vuex 里面
+        this.$store.dispatch('saveUserName',res.name)
+      })
+    },
+    // 获取购物车的数据
+    getCartCount(){
+      this.axios.get('/carts/products/sum').then((res=0)=>{
+        //
+        this.$store.dispatch('saveCartCount',res)
+      })
+    }
+  },
 }
 </script>
 
 
 <style lang="scss">
+
 @import './assets/scss/reset.scss';
 @import './assets/scss/config.scss';
 @import './assets/scss/button.scss';
+@import './assets/scss/mixin.scss';
+
 </style>
 
 

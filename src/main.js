@@ -7,13 +7,15 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'   
 import VueLazyload from 'vue-lazyload'
 // import env from './env'
+import Cookie from 'vue-cookie';
+import Vuex from 'vuex'
 
 
 
 
 // 根据前端的跨域方式进行调整 /a/b :   /api/a/b  =>/a/b
 axios.defaults.baseURL = '/api';
-axios.defaults.timeout = 8000; 
+// axios.defaults.timeout = 8000; 
 
 // 根据环境变量获取不同的请求地址
 // axios.defaults.baseURL=env.baseURL
@@ -21,10 +23,13 @@ axios.defaults.timeout = 8000;
 // 接口错误拦截
 axios.interceptors.response.use(function(response){
   let res =  response.data
+  let path =location.hash
   if(res.status == 0) {
     return res.data
   }else if(res.status == 10){
-    window.location.href='/#/login'
+    if(path!= '#index'){
+      window.location.href='/#/login';
+    }
   }else{
     alert(res.msg)
   }
@@ -33,6 +38,8 @@ axios.interceptors.response.use(function(response){
 
 
 // Vue.use 导入外部的插件
+Vue.use(Vuex)
+Vue.use(Cookie)
 Vue.use(VueLazyload,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })

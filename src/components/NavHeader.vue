@@ -14,6 +14,7 @@
                 <div class="topbar-user">
                     <a href="javascript:;" v-if="username">{{username}}</a>
                     <a href="javascript:;" v-if="!username" v-on:click='login'> 登录</a>
+                    <a href="javascript:;" v-if="!username" v-on:click='login'> 注册</a>
                     <a href="javascript:;" v-if="username">我的订单</a>
                     <!-- v-on:click == @click -->
                     <a href="javascript:;" class="my-cart" v-on:click="goToCart"><span class="icon-cart"></span>购物车</a>
@@ -152,7 +153,7 @@ Vue.use(VueAxios,axios)
         // 一定要定义局部data        全局的data容易造成数据的串用
         data(){
             return{
-                username:'jack',
+                username:'123',
                 phoneList:[]
             }
         },
@@ -226,6 +227,7 @@ Vue.use(VueAxios,axios)
                     background-color:#ff6600;
                     text-align: center;
                     color: #ffffff;
+                    margin-right: 0;
                     .icon-cart{
                         display: inline-block;
                         width: 16px;
