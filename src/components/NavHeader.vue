@@ -37,7 +37,7 @@
                                 <li class="product" v-for="(item,index) in phoneList" :key="index" >
                                     <a v-bind:href="'/#/product/'+item.id " target="_blank">
                                         <div class="pro-img">
-                                            <img :src="item.mainImage" :alt="item.subtitle">
+                                            <img v-lazy="item.mainImage" :alt="item.subtitle">
                                         </div>
                                         <div class="pro-name">{{item.name}}</div>
                                         <div class="pro-price">{{item.price | currency}}</div>
@@ -54,7 +54,7 @@
                                 <li class="product" v-for="(item,index) in phoneList" :key="index" >
                                     <a v-bind:href="'/#/product/'+item.id " target="_blank">
                                         <div class="pro-img">
-                                            <img :src="item.mainImage" :alt="item.subtitle">
+                                            <img v-lazy="item.mainImage" :alt="item.subtitle">
                                         </div>
                                         <div class="pro-name">{{item.name}}</div>
                                         <div class="pro-price">{{item.price | currency}}</div>
@@ -72,7 +72,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-1.jpg" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-1.jpg'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">小米壁画电视 65英寸</div>
                                         <div class="pro-price">6999元</div>
@@ -81,7 +81,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-2.jpg" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-2.jpg'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">小米全面屏电视E55A</div>
                                         <div class="pro-price">1999元</div>
@@ -90,7 +90,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-3.png" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-3.png'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">小米电视4A 32英寸</div>
                                         <div class="pro-price">699元</div>
@@ -99,7 +99,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-4.jpg" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-4.jpg'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">小米电视4A 55英寸</div>
                                         <div class="pro-price">1799元</div>
@@ -108,7 +108,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-5.jpg" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-5.jpg'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">小米电视4A 65英寸</div>
                                         <div class="pro-price">2699元</div>
@@ -117,7 +117,7 @@
                                 <li class="product">
                                     <a href="" target="_blank">
                                         <div class="pro-img">
-                                            <img src="/imgs/nav-img/nav-3-6.png" alt="图片加载错误">
+                                            <img v-lazy="'/imgs/nav-img/nav-3-6.png'" alt="图片加载错误">
                                         </div>
                                         <div class="pro-name">查看全部</div>
                                         <div class="pro-price">小米电视</div>
@@ -179,7 +179,7 @@ Vue.use(VueAxios,axios)
                         categoryId:'100012',
                     }
                 }).then((res)=>{
-                    console.log(res)
+                    // console.log(res)
                     // 如果请求的数组数必须大于6条    然后使用slice 截取 0 -6 之间的数
                     if(res.list.length>6){
                         this.phoneList =res.list.slice(0,6)
@@ -201,6 +201,8 @@ Vue.use(VueAxios,axios)
 <style lang="scss">
 @import url('../assets/scss/base.scss');
 @import '../assets/scss/config.scss';
+  @import './../assets/scss/mixin.scss';
+  
 // @import url('../assets/scss/mixing.scss');
     /* lang: 用来定于style的语法 */
     .header{
@@ -243,39 +245,7 @@ Vue.use(VueAxios,axios)
            display: flex;
            justify-content: space-between;
            align-items: center;
-           .header-logo{
-               display: inline-block;
-               width: 55px;
-               height: 55px;
-               background-color: #ff6600;
-               a{
-                   display: inline-block;
-                   width: 110px;
-                   height: 55px;
-                   &::before{
-                    //    因为痿是需要站位的所以如果需要使用则需要设置content为：‘ ’
-                       content: ' ';
-                       display: inline-block;
-                       width: 55px;
-                       height: 55px;
-                       background:url('/imgs/mi-logo.png') no-repeat center;
-                       background-size: contain;
-                       transition: all .4s;
-                   };
-                   &::after{
-                       content: ' ';
-                       display: inline-block;
-                       width: 55px;
-                       height: 55px;
-                       background:url('/imgs/mi-home.png') no-repeat center;
-                       background-size: contain;
-                   };
-                   &:hover::before{
-                       margin-left: -55px;
-                       transition: margin .2s;
-                   }
-               }
-           };
+
            .header-menu{
                display: inline-block;
                padding-left: 209px;
@@ -313,6 +283,7 @@ Vue.use(VueAxios,axios)
                        height: 0;
                        transition: all .2s;
                        overflow: hidden;
+                       background-color: #ffffff;
                        .product{
                            position: relative;
                            float: left;
@@ -355,6 +326,41 @@ Vue.use(VueAxios,axios)
                    }
                }
            };
+           
+           .header-logo{
+               display: inline-block;
+               width: 55px;
+               height: 55px;
+               background-color: #ff6600;
+               a{
+                   display: inline-block;
+                   width: 110px;
+                   height: 55px;
+                   &::before{
+                    //    因为痿是需要站位的所以如果需要使用则需要设置content为：‘ ’
+                       content: ' ';
+                       display: inline-block;
+                       width: 55px;
+                       height: 55px;
+                       background:url('/imgs/mi-logo.png') no-repeat center;
+                       background-size: contain;
+                       transition: all .4s;
+                   };
+                   &::after{
+                       content: ' ';
+                       display: inline-block;
+                       width: 55px;
+                       height: 55px;
+                       background:url('/imgs/mi-home.png') no-repeat center;
+                       background-size: contain;
+                   };
+                   &:hover::before{
+                       margin-left: -55px;
+                       transition: margin .2s;
+                   }
+               }
+           };
+           
            .header-search{
                width: 319px;
                .wrapper{

@@ -5,6 +5,7 @@ import router from './router'
 // vue-axios是将axios集成到Vue.js的小包装器
 import axios from 'axios'
 import VueAxios from 'vue-axios'   
+import VueLazyload from 'vue-lazyload'
 // import env from './env'
 
 
@@ -32,7 +33,9 @@ axios.interceptors.response.use(function(response){
 
 
 // Vue.use 导入外部的插件
-
+Vue.use(VueLazyload,{
+  loading:'/imgs/loading-svg/loading-bars.svg'
+})
 Vue.use(VueAxios,axios)
 Vue.config.productionTip = false
 

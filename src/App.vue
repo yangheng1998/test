@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// import storage from './storage/index'
 
 export default {
   name:'app',
@@ -39,21 +38,11 @@ export default {
 </script>
 
 
-
-
-<style>
-@import url('./assets/scss/reset.scss');
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
+<style lang="scss">
+@import './assets/scss/reset.scss';
+@import './assets/scss/config.scss';
+@import './assets/scss/button.scss';
 </style>
+
+
+
