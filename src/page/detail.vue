@@ -70,30 +70,32 @@ import ServiceBar from './../components/ServiceBar';
 export default{
   name:'detail',
   data(){
-    return {
-      id:this.$route.params.id,//获取商品ID
-      err:'',
-      version:1,//商品版本切换
-      product:{},//商品信息
-      swiperOption:{
-        autoplay:true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable :true,
+        return {
+        id:this.$route.params.id,//获取商品ID
+        err:'',
+        version:1,//商品版本切换
+        product:{},//商品信息
+        swiperOption:{
+            autoplay:true,
+            pagination: {
+            el: '.swiper-pagination',
+            clickable :true,
+            }
         }
-      }
-    }
-  },
-  components:{
-    swiper,
-    swiperSlide,
-    ProductParam,
-    ServiceBar
-  },
-  mounted(){
+        }
+    },
+    components:{
+        swiper,
+        swiperSlide,
+        ProductParam,
+        ServiceBar
+    },
+
+    mounted(){
       this.getProductInfo()
-  },
-  methods: {
+    },
+
+    methods: {
       getProductInfo(){
           let id =this.$route.params.id;
           this.axios.get(`/products/${id}`).then((res)=>{
@@ -106,31 +108,13 @@ export default{
               productId:this.id,
               selected:true
           }).then((res)=>{
-              console.log(res)
+            //   console.log(res)
               this.$store.dispatch('saveCartCount',res.cartTotalQuantity)
-            //   this.$router.push('/cart')
+              this.$router.push('/cart')
           })
       }
-  },
-//   mounted(){
-//     this.getProductInfo();
-//   },
-//   methods:{
-//     getProductInfo(){
-//       this.axios.get(`/products/${this.id}`).then((res)=>{
-//         this.product = res;
-//       })
-//     },
-//     addCart(){
-//       this.axios.post('/carts',{
-//         productId:this.id,
-//         selected: true
-//       }).then((res={cartProductVoList:0})=>{
-//         this.$store.dispatch('saveCartCount',res.cartTotalQuantity);
-//         // this.$router.push('/cart');
-//       });
-//     }
-//   }
+    },
+
 }
 </script>
 <style lang="scss">

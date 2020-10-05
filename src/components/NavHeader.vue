@@ -15,10 +15,10 @@
                     <a href="javascript:;" v-if="username">{{username}}</a>
                     <a href="javascript:;" v-if="!username" v-on:click='login'> 登录</a>
                     <!-- <a href="javascript:;" v-if="username" v-on:click='login'>{{username='' ? 注册 : 退出}} </a> -->
-                    <a href="javascript:;" v-if="username" v-on:click='login'>退出 </a>
+                    <a href="javascript:;" v-if="username" v-on:click='logout'>退出 </a>
                     <a href="javascript:;" v-if="username">我的订单</a>
                     <!-- v-on:click == @click -->
-                    <a href="javascript:;" class="my-cart" v-on:click="goToCart"><span class="icon-cart"></span>购物车</a>
+                    <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
                 </div>
             </div>
         </div>    
@@ -147,6 +147,7 @@
 import VueAxios from 'vue-axios';
 import axios from 'axios';
 import Vue from 'vue'
+import {mapState} from 'vuex'
 
 Vue.use(VueAxios,axios)
     export default {
@@ -154,7 +155,6 @@ Vue.use(VueAxios,axios)
         // 一定要定义局部data        全局的data容易造成数据的串用
         data(){
             return{
-                username:'',
                 phoneList:[]
             }
         },
@@ -166,9 +166,23 @@ Vue.use(VueAxios,axios)
             }
         },
 
+        computed:{
+        /*username(){
+            return this.$store.state.username;
+        },
+        cartCount(){
+            return this.$store.state.cartCount;
+        }*/
+            ...mapState(['username','cartCount'])
+        },
+
         // mounted 初始化调用这个方法
         mounted() {
             this.getProductList()
+            let params = this.$route.params;
+            if(params && params.from == 'login'){
+                this.getCartCount();
+            }
         },
         methods:{
             login(){
@@ -192,8 +206,29 @@ Vue.use(VueAxios,axios)
             goToCart(){
                 // 使用下面的语句进行路由的跳转
                 this.$router.push('/cart')
+            },
+
+            getCartCount(){
+                this.axios.get('/carts/products/sum')
+                .then((res=0)=>{
+                    this.$store.dispatch('saveCartCount',res);
+                })
+            },
+            
+            logout(){
+
             }
-        }
+
+             // logout(){
+            //     this.axios.post('/user/logout').then(()=>{
+            //     this.$message.success('退出成功');
+            //     this.$cookie.set('userId','',{expires:'-1'});
+            //     this.$store.dispatch('saveUserName','');
+            //     this.$store.dispatch('saveCartCount','0');
+            //     })
+            // },
+        },
+           
 
     }
 </script>

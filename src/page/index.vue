@@ -259,9 +259,9 @@ export default {
                 
             })
         },
-        addCart(){
+        addCart(id){
             this.axios.post('/carts',{
-                productId:this.id,
+                productId:id,
                 selected:true
             }).then((res)=>{
                 this.showModal =true;

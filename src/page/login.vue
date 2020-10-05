@@ -3,7 +3,6 @@
     <div class="container">
       <a href="/#/index"><img src="/imgs/login-logo.png" alt=""></a>
     </div>
-
     <div class="wrapper">
       <div class="container">
         <div class="login-form">
@@ -17,7 +16,7 @@
             <input type="password" placeholder="请输入密码" v-model="password">
           </div>
           <div class="btn-box">
-            <a href="" class="btn" @click="login">登录</a>
+            <a href="javascript:;" class="btn" @click="login">登录</a>
           </div>
           <div class="tips">
             <div class="sms" @click="register">手机短信登录/注册</div>
@@ -48,6 +47,7 @@ export default {
       userId:''
     }
   },
+
   methods:{
     login(){
       let { username,password } = this;
@@ -58,17 +58,17 @@ export default {
         this.$cookie.set('userId',res.id,{expires:'Session'});
         this.$store.dispatch('saveUserName',res.username);
         this.saveUserName(res.username);
-        // this.$router.push({
-        //   name:'index',
-        //   params:{
-        //     from:'login'
-        //   }
-        // });
-        this.$router.push('/index')
+        this.$router.push({
+          name:'index',
+          params:{
+            from:'login'
+          }
+        });
       })
     },
     ...mapActions(['saveUserName']),
-    // 注册账号
+
+
     register(){
       this.axios.post('/user/register',{
         username:'admin1',
@@ -78,6 +78,16 @@ export default {
         this.$message.success('注册成功');
       })
     }
+    // // 注册账号
+    // register(){
+    //   this.axios.post('/user/register',{
+    //     username:'admin1',
+    //     password:'admin1',
+    //     email:'admin1@163.com'
+    //   }).then(()=>{
+    //     this.$message.success('注册成功');
+    //   })
+    // }
   }
 }
 </script>

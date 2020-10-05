@@ -1,56 +1,54 @@
 import Vue from 'vue'
-import App from './App.vue'
 import router from './router'
-// 把vue作用域对象挂载代axios是一个库，并不是vue中的第三方插件，使用时不能通过Vue.use()安装插件
-// vue-axios是将axios集成到Vue.js的小包装器
 import axios from 'axios'
-import VueAxios from 'vue-axios'   
-import VueLazyload from 'vue-lazyload'
+import VueAxios from 'vue-axios'
+import VueLazyLoad from 'vue-lazyload'
+import VueCookie from 'vue-cookie'
+import { Message } from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+import store from './store'
+import App from './App.vue'
 // import env from './env'
-import Cookie from 'vue-cookie';
-import Vuex from 'vuex'
-
-
-
-
-
-// 根据前端的跨域方式进行调整 /a/b :   /api/a/b  =>/a/b
+// mock开关
+const mock = false;
+if(mock){
+  require('./mock/api');
+}
+// 根据前端的跨域方式做调整 /a/b : /api/a/b => /a/b
+// axios.defaults.baseURL = 'https://www.easy-mock.com/mock/5dc7afee2b69d9223b633cbb/mimall';
 axios.defaults.baseURL = '/api';
-// axios.defaults.timeout = 8000; 
-
+axios.defaults.timeout = 8000; 
 // 根据环境变量获取不同的请求地址
-// axios.defaults.baseURL=env.baseURL
-
+// axios.defaults.baseURL = env.baseURL;
 // 接口错误拦截
 axios.interceptors.response.use(function(response){
-  let res =  response.data
-  let path =location.hash
-  if(res.status == 0) {
-    return res.data
+  let res = response.data;
+  if(res.status == 0){
+    return res.data;
   }else if(res.status == 10){
-    if(path!= '#/index'){
-      window.location.href='/#/login';
-      
-    }
-    return Promise.reject(res)
+    window.location.href = '/#/login';
+    return Promise.reject(res);
   }else{
-    alert(res.msg)
-    return Promise.reject(res)
+    Message.warning(res.msg);
+    return Promise.reject(res);
   }
-})
+},(error)=>{
+  let res = error.response;
+  Message.error(res.data.message);
+  return Promise.reject(error);
+});
 
-
-
-// Vue.use 导入外部的插件
-Vue.use(Vuex)
-Vue.use(Cookie)
-Vue.use(VueLazyload,{
+// Vue.use 使用外部的插件
+Vue.use(VueAxios,axios);
+Vue.use(VueCookie);
+Vue.use(VueLazyLoad,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })
-Vue.use(VueAxios,axios)
+Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 
 new Vue({
+  store,
   router,
-  render: h => h(App)
+  render: h => h(App),
 }).$mount('#app')
