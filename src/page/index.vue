@@ -143,6 +143,7 @@ export default {
     },
     data(){
         return{
+            id:this.$route.params.id,//获取商品ID
             swiperOption:{
                 autoplay:true,
                 loop:true,
@@ -251,7 +252,6 @@ export default {
             }).then((res)=>{
                 // slice()不会改变元素组 对数组进行分割
                 // splice（）他会改变元素的一个对象
-                
                 var phoneList2=[] 
                 phoneList2=res.list.slice(6,14);
                 
@@ -260,16 +260,15 @@ export default {
             })
         },
         addCart(){
-            this.showModal =true
-            
-            // this.axios.post('/carts',{
-            //     productId:id,
-            //     selected:true
-            // }).then(()=>{
-
-            // }).catch(()=>{
-            //     this.showModal =true;
-            // })
+            this.axios.post('/carts',{
+                productId:this.id,
+                selected:true
+            }).then((res)=>{
+                this.showModal =true;
+                this.$store.dispatch('saveCartCount',res.cartTotalQuantity)
+            }).catch(()=>{
+                this.showModal =true;
+            })
         },
         goToCart(){
             this.$router.push('/cart')

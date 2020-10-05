@@ -88,10 +88,11 @@ export default {
       this.getProductInfo();
     },
     methods:{
-      getProductInfo(){
+     getProductInfo(){
         let id = this.$route.params.id;
         this.axios.get(`/products/${id}`).then((res)=>{
           this.product = res;
+          // console.log(this.product)
         })
       },
       buy(){

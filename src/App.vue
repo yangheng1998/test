@@ -42,16 +42,16 @@ export default {
   methods: {
     // 获取用户者的数据
     getUser(){
-      this.axios.get('/user').then((res={})=>{
+      this.axios.get('/user').then(()=>{
         //  to-do  保存早 vuex 里面
-        this.$store.dispatch('saveUserName',res.name)
+        // this.$store.dispatch('saveUserName',res.name)
       })
     },
     // 获取购物车的数据
     getCartCount(){
-      this.axios.get('/carts/products/sum').then((res=0)=>{
+      this.axios.get('/carts/products/sum').then(()=>{
         //
-        this.$store.dispatch('saveCartCount',res)
+        // this.$store.dispatch('saveCartCount',res)
       })
     }
   },
