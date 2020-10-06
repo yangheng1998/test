@@ -58,7 +58,7 @@
           </div>
           <div class="total fr">
             合计：<span>{{cartTotalPrice}}</span>元
-            <a href="" class="btn" @click="order">去结算</a>
+            <a href="javascript:;" class="btn" @click="order">去结算</a>
           </div>
         </div>
       </div>
@@ -144,7 +144,7 @@ export default {
         delProduct(item){
             this.axios.delete(`/carts/${item.productId}`).then((res)=>{
                 this.renderData(res);
-                this.showModal=true
+                this.showModal=false
             })
         },
         // 购物车下单
@@ -156,10 +156,11 @@ export default {
             }else{
                 this.$router.push('/order/confirm');
             }
+            
         },
       
         renderData(res){
-             this.list =res.cartProductVoList || [];
+            this.list =res.cartProductVoList || [];
             this.allChecked =res.selectedAll;
             this.cartTotalPrice = res.cartTotalPrice;
             this.checkedNum= this.list.filter(item=>item.productSelected).length;

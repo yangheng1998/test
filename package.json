@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "babel-plugin-component": "^1.1.1",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
     "mockjs": "^1.1.0",
     "node-sass": "^4.14.1",
+    "qrcode": "^1.4.4",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "swiper": "^6.3.2",

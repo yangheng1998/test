@@ -1,4 +1,5 @@
 import Vue from 'vue'
+// import Vue from'vue/dist/vue.min.js'
 import router from './router'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
@@ -39,11 +40,13 @@ axios.interceptors.response.use(function(response){
 });
 
 // Vue.use 使用外部的插件
+
 Vue.use(VueAxios,axios);
 Vue.use(VueCookie);
 Vue.use(VueLazyLoad,{
   loading:'/imgs/loading-svg/loading-bars.svg'
 })
+// 通过原型的方式给他扩展一个对象
 Vue.prototype.$message = Message;
 Vue.config.productionTip = false
 

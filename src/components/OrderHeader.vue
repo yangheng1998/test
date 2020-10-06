@@ -41,7 +41,7 @@ import {mapState} from 'vuex';
 
     .order-header{
         padding: 30px 0 ;
-
+        border-bottom: 2px solid #ff6600;
 
         .container{
             .title,.username{
@@ -50,15 +50,18 @@ import {mapState} from 'vuex';
                 line-height: 55px;
             }
             .title{
-                font-size: 28px;
+                
                 float: left;
                 margin-left: 54px;
-                color: #333333;
+                h2{
+                    font-size: 28px;
+                    color: #333333;
+                }
                 span{
                     font-size: 14px;
                     margin-left: 17px;
                     color: #999999;
-                    font-weight: bold
+                    font-weight: 200;
                 }
             }
             .username{
