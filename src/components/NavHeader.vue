@@ -16,7 +16,7 @@
                     <a href="javascript:;" v-if="!username" v-on:click='login'> 登录</a>
                     <!-- <a href="javascript:;" v-if="username" v-on:click='login'>{{username='' ? 注册 : 退出}} </a> -->
                     <a href="javascript:;" v-if="username" v-on:click='logout'>退出 </a>
-                    <a href="javascript:;" v-if="username">我的订单</a>
+                    <a href="/#/order/list" v-if="username">我的订单</a>
                     <!-- v-on:click == @click -->
                     <a href="javascript:;" class="my-cart" @click="goToCart"><span class="icon-cart"></span>购物车({{cartCount}})</a>
                 </div>
